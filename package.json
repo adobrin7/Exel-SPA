@@ -1,0 +1,25 @@
+{
+  "name": "exel-spa",
+  "version": "1.0.0",
+  "description": "Exel Application",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adobrin7/Exel-SPA.git"
+  },
+  "keywords": [
+    "JS",
+    "JavaScript",
+    "Exel",
+    "SPA"
+  ],
+  "author": "Alexandr Dobrin <dobrin.alexandrr@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adobrin7/Exel-SPA/issues"
+  },
+  "homepage": "https://github.com/adobrin7/Exel-SPA#readme"
+}
