@@ -12,7 +12,7 @@ const fileName = ext => isDev ? `bundle.${ ext }` : `bundle.[hash].${ ext }`;
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   mode: "development",
-  entry: "./index.js",
+  entry: ["@babel/polyfill", "./index.js"],
   output: {
     filename: fileName('js'),
     path: path.resolve(__dirname, 'dist')
@@ -25,6 +25,16 @@ module.exports = {
     }
   },
   devtool: isDev ? 'source-map' : false,
+  devServer: {
+    port: 3000,
+    hot: true,
+    watchContentBase: true,
+    contentBase: [
+      path.resolve(__dirname, "./src/index.html"),
+      path.resolve(__dirname, "./src/index.js"),
+    ],
+  },
+  target: isDev ? 'web' : 'browserslist',
   plugins: [
     new CleanWebpackPlugin(),
     new HTMLWebpackPlugin({
@@ -67,5 +77,5 @@ module.exports = {
         }
       }
     ],
-  }
+  },
 }
