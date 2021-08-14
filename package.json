@@ -21,5 +21,9 @@
   "bugs": {
     "url": "https://github.com/adobrin7/Exel-SPA/issues"
   },
-  "homepage": "https://github.com/adobrin7/Exel-SPA#readme"
+  "homepage": "https://github.com/adobrin7/Exel-SPA#readme",
+  "devDependencies": {
+    "webpack": "^5.50.0",
+    "webpack-cli": "^4.7.2"
+  }
 }
