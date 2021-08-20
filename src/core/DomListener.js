@@ -16,12 +16,16 @@ export class DomListener {
         const name = this.name ?? '';
         throw new Error(`${method} is not implemented in ${name} component`);
       }
-      this.$root.on(listener, this[method].bind(this));
+      this[method] = this[method].bind(this);
+      this.$root.on(listener, this[method]);
     });
   }
 
   removeDomListeners() {
-
+    this.listeners.forEach(listener => {
+      const method = getMethodName(listener);
+      this.$root.off(listener, this[method]);
+    });
   }
 }
 
