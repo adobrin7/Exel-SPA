@@ -23,7 +23,7 @@ function toColumn(col, idx) {
 function createRow(content, idx = '') {
   const resizer = idx ? `<div class="row_resize" data-resize="row"></div>` : '';
   return `
-    <div class="exel__table-row row">
+    <div class="exel__table-row row" data-type="resizable">
       <div class="row__info">
         ${idx}
         ${resizer}

@@ -22,13 +22,20 @@ export class Table extends ExelComponent {
     const $resizer = $(event.target);
     const $parent = $resizer.closest('[data-type="resizable"]');
     const coords = $parent.getCoords();
+    const type = $resizer.data.resize;
     const cells = this.$root.findAll(`[data-col="${$parent.data.col}"]`);
 
     document.onmousemove = e => {
-      const delta = e.pageX - coords.right;
-      const width = coords.width + delta;
-      $parent.$el.style.width = width + 'px';
-      cells.forEach(cell => cell.style.width = width + 'px');
+      if (type === 'col') {
+        const delta = e.pageX - coords.right;
+        const width = coords.width + delta;
+        $parent.$el.style.width = width + 'px';
+        cells.forEach(cell => cell.style.width = width + 'px');
+      } else {
+        const delta = e.pageY - coords.bottom;
+        const value = coords.height + delta;
+        $parent.$el.style.height = value + 'px';
+      }
     };
 
     document.onmouseup = () => {
