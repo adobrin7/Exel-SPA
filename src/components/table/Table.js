@@ -22,7 +22,7 @@ export class Table extends ExelComponent {
     const $resizer = $(event.target);
     const $parent = $resizer.closest('[data-type="resizable"]');
     const coords = $parent.getCoords();
-    const cells = document.querySelectorAll(`[data-col="${$parent.data.col}"]`);
+    const cells = this.$root.findAll(`[data-col="${$parent.data.col}"]`);
 
     document.onmousemove = e => {
       const delta = e.pageX - coords.right;
