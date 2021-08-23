@@ -28,13 +28,13 @@ export class Table extends ExelComponent {
     document.onmousemove = e => {
       if (type === 'col') {
         const delta = e.pageX - coords.right;
-        const width = coords.width + delta;
-        $parent.$el.style.width = width + 'px';
-        cells.forEach(cell => cell.style.width = width + 'px');
+        const value = coords.width + delta;
+        $parent.css({width: value + 'px'});
+        cells.forEach(cell => cell.style.width = value + 'px');
       } else {
         const delta = e.pageY - coords.bottom;
         const value = coords.height + delta;
-        $parent.$el.style.height = value + 'px';
+        $parent.css({height: value + 'px'});
       }
     };
 
