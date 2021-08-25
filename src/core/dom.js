@@ -38,6 +38,27 @@ class Dom {
       this.$el.appendChild(node);
     }
   }
+
+  closest(selector) {
+    return $(this.$el.closest(selector));
+  }
+
+  getCoords() {
+    return this.$el.getBoundingClientRect();
+  }
+
+  get data() {
+    return this.$el.dataset;
+  }
+
+  findAll(selector) {
+    return this.$el.querySelectorAll(selector);
+  }
+
+  css(styles = {}) {
+    const elStyles = this.$el.style;
+    Object.assign(elStyles, styles);
+  }
 }
 
 export function $(selector) {
