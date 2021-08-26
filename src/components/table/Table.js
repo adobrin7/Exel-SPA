@@ -2,6 +2,7 @@ import {ExelComponent} from '@/core/ExelComponent';
 import {createTable} from './table.template';
 import {resizeHandler} from './table.resize';
 import {shouldResize} from './functions';
+import {TableSelection} from './TableSelection';
 
 export class Table extends ExelComponent {
   static className = 'exel__table';
@@ -10,6 +11,16 @@ export class Table extends ExelComponent {
     super($root, {
       listeners: ['mousedown'],
     });
+  }
+
+  prepare() {
+    this.selection = new TableSelection();
+  }
+
+  init() {
+    super.init();
+    const $cell = this.$root.find('[data-id="0:0"]');
+    this.selection.select($cell);
   }
 
   toHTML() {
