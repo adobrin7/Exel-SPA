@@ -82,6 +82,11 @@ class Dom {
   removeClass(name) {
     this.$el.classList.remove(name);
   }
+
+  focus() {
+    this.$el.focus();
+    return this;
+  }
 }
 
 export function $(selector) {
