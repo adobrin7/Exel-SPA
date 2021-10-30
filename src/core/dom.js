@@ -70,6 +70,10 @@ class Dom {
     return this.data.id;
   }
 
+  text(text) {
+    this.$el.textContent = text;
+  }
+
   css(styles = {}) {
     const elStyles = this.$el.style;
     Object.assign(elStyles, styles);

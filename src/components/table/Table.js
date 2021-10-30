@@ -3,14 +3,16 @@ import {createTable} from './table.template';
 import {resizeHandler} from './table.resize';
 import {isCell, matrix, nextSelector, shouldResize} from './functions';
 import {TableSelection} from './TableSelection';
-import {$} from '../../core/dom';
+import {$} from '@core/dom';
 
 export class Table extends ExelComponent {
   static className = 'exel__table';
 
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
+      name: 'Table',
       listeners: ['mousedown', 'keydown'],
+      ...options,
     });
   }
 
@@ -22,6 +24,10 @@ export class Table extends ExelComponent {
     super.init();
     const $cell = this.$root.find('[data-id="0:0"]');
     this.selection.select($cell);
+
+    this.emitter.subscribe('twerk', text => {
+      this.selection.current.text(text);
+    });
   }
 
   toHTML() {

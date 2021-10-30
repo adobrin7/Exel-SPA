@@ -3,10 +3,11 @@ import {ExelComponent} from '@/core/ExelComponent';
 export class Formula extends ExelComponent {
   static className = 'exel__formula';
 
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
       name: 'Formula',
       listeners: ['input'],
+      ...options,
     });
   }
 
@@ -18,6 +19,7 @@ export class Formula extends ExelComponent {
   }
 
   onInput(event) {
-    console.log('Formula onInput', event);
+    const text = event.target.textContent.trim();
+    this.emitter.emit('twerk', text);
   }
 }
