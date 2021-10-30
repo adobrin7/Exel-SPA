@@ -11,7 +11,7 @@ export class Table extends ExelComponent {
   constructor($root, options) {
     super($root, {
       name: 'Table',
-      listeners: ['mousedown', 'keydown'],
+      listeners: ['mousedown', 'keydown', 'input'],
       ...options,
     });
   }
@@ -23,15 +23,24 @@ export class Table extends ExelComponent {
   init() {
     super.init();
     const $cell = this.$root.find('[data-id="0:0"]');
-    this.selection.select($cell);
+    this.selectCell($cell);
 
     this.$on('formula:input', text => {
       this.selection.current.text(text);
+    });
+
+    this.$on('formula:done', () => {
+      this.selection.current.focus();
     });
   }
 
   toHTML() {
     return createTable(15);
+  }
+
+  selectCell($cell) {
+    this.selection.select($cell);
+    this.$emit('table:input', $cell);
   }
 
   onMousedown(event) {
@@ -65,7 +74,13 @@ export class Table extends ExelComponent {
       event.preventDefault();
       const id = this.selection.current.id(true);
       const $next = this.$root.find(nextSelector(key, id));
+      this.selectCell($next);
       this.selection.select($next);
+      this.$emit('table:select', $next);
     }
+  }
+
+  onInput(event) {
+    this.$emit('table:input', $(event.target));
   }
 }
