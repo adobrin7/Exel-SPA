@@ -51,13 +51,52 @@ class Dom {
     return this.$el.dataset;
   }
 
+  find(selector) {
+    return $(this.$el.querySelector(selector));
+  }
+
   findAll(selector) {
     return this.$el.querySelectorAll(selector);
+  }
+
+  id(parse) {
+    if (parse) {
+      const parsed = this.id().split(':');
+      return {
+        row: +parsed[0],
+        col: +parsed[1],
+      };
+    }
+    return this.data.id;
+  }
+
+  text(text) {
+    if (typeof text === 'string') {
+      this.$el.textContent = text;
+      return this;
+    }
+    if (this.$el.tagName.toLowerCase() === 'input') {
+      return this.$el.value.trim();
+    }
+    return this.$el.textContent.trim();
   }
 
   css(styles = {}) {
     const elStyles = this.$el.style;
     Object.assign(elStyles, styles);
+  }
+
+  addClass(name) {
+    this.$el.classList.add(name);
+  }
+
+  removeClass(name) {
+    this.$el.classList.remove(name);
+  }
+
+  focus() {
+    this.$el.focus();
+    return this;
   }
 }
 

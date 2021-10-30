@@ -3,10 +3,16 @@ const CODES = {
   Z: 90,
 };
 
-function toCell(_, col) {
-  return `
-    <div class="exel__table-cell" 
-      contenteditable data-col="${col}"></div>`;
+function toCell(row) {
+  return function(_, col) {
+    return `
+    <div class="exel__table-cell"
+      contenteditable 
+      data-col="${col}"
+      data-id="${row}:${col}"
+      data-type="cell"
+    ></div>`;
+  };
 }
 
 function toColumn(col, idx) {
@@ -48,12 +54,12 @@ export function createTable(rowsCount = 15) {
       .join('');
   rows.push(createRow(cols));
 
-  for (let i = 0; i < rowsCount; i++) {
+  for (let row = 0; row < rowsCount; row++) {
     const cells = new Array(colsCount)
         .fill('')
-        .map(toCell)
+        .map(toCell(row))
         .join('');
-    const cellIdx = (i + 1).toString();
+    const cellIdx = (row + 1).toString();
     rows.push(createRow(cells, cellIdx));
   }
   return rows.join('');
