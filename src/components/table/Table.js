@@ -25,7 +25,7 @@ export class Table extends ExelComponent {
     const $cell = this.$root.find('[data-id="0:0"]');
     this.selection.select($cell);
 
-    this.emitter.subscribe('twerk', text => {
+    this.$on('formula:input', text => {
       this.selection.current.text(text);
     });
   }

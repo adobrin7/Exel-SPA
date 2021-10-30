@@ -20,6 +20,6 @@ export class Formula extends ExelComponent {
 
   onInput(event) {
     const text = event.target.textContent.trim();
-    this.emitter.emit('twerk', text);
+    this.$emit('formula:input', text);
   }
 }
